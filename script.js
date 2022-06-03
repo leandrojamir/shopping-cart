@@ -34,25 +34,28 @@ const getItens = async () => {
   console.log(getFetchProducts);
   getFetchProducts.forEach((item) => {
     // eslint-disable-next-line max-len
-    const appendProducts = createProductItemElement({ sku: item.id, name: item.title, image: item.thumbnail });
+    const appendProducts = createProductItemElement({ 
+      sku: item.id, 
+      name: item.title, 
+      image: item.thumbnail });
     const setFetchPoducts = document.querySelector('.items');
     setFetchPoducts.appendChild(appendProducts);
   });  
 };
 
-const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
+// const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
-const cartItemClickListener = (event) => {
-  // coloque seu código aqui
-};
+// const cartItemClickListener = (event) => {
+//   // coloque seu código aqui
+// };
 
-const createCartItemElement = ({ sku, name, salePrice }) => {
-  const li = document.createElement('li');
-  li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  li.addEventListener('click', cartItemClickListener);
-  return li;
-};
+// const createCartItemElement = ({ sku, name, salePrice }) => {
+//   const li = document.createElement('li');
+//   li.className = 'cart__item';
+//   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+//   li.addEventListener('click', cartItemClickListener);
+//   return li;
+// };
 
 window.onload = () => {
   getItens();
