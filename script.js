@@ -23,6 +23,22 @@ const createProductItemElement = ({ sku, name, image }) => {
 
   return section;
 };
+// Adicione cada elemento retornado da função createProductItemElement(product) como filho do elemento 
+// <section class="items">.
+// Obs: Utilize as variáveis fornecidas no código, elas devem se referir aos seguintes campos:
+// sku: é o campo id retornado pela API;
+// name: é o campo title retornado pela API;
+// image: é o campo thumbnail retornado pela API.
+const getItens = async () => {
+  const getFetchProducts = await fetchProducts('computador');
+  console.log(getFetchProducts);
+  getFetchProducts.forEach((item) => {
+    // eslint-disable-next-line max-len
+    const appendProducts = createProductItemElement({ sku: item.id, name: item.title, image: item.thumbnail });
+    const setFetchPoducts = document.querySelector('.items');
+    setFetchPoducts.appendChild(appendProducts);
+  });  
+};
 
 const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
@@ -38,4 +54,6 @@ const createCartItemElement = ({ sku, name, salePrice }) => {
   return li;
 };
 
-window.onload = () => { };
+window.onload = () => {
+  getItens();
+ };
