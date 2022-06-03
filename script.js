@@ -12,8 +12,11 @@ const createCustomElement = (element, className, innerText) => {
   return e;
 };
 
+// 5. Remova o item do carrinho de compras ao clicar nele
+
 const cartItemClickListener = (event) => {
-  console.log(event);
+  // Utilize a função cartItemClickListener(event) para implementar a lógica necessária para remover o item do carrinho.
+  event.target.remove();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -52,6 +55,7 @@ const createProductItemElement = ({ sku, name, image }) => {
 
   return section;
 };
+
 // Adicione cada elemento retornado da função createProductItemElement(product) como filho do elemento 
 // <section class="items">.
 // Obs: Utilize as variáveis fornecidas no código, elas devem se referir aos seguintes campos:
