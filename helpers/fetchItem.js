@@ -10,7 +10,8 @@ const fetchItem = async (ItemID) => {
     return error;
   }
 };
-fetchItem('MLB1341706310');
+console.log(fetchItem('MLB1615760527'));
+console.log(fetchItem());
 
 if (typeof module !== 'undefined') {
   module.exports = {
