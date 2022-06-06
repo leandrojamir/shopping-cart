@@ -31,7 +31,7 @@ const saveToLocalStorage = () => {
 const cartItemClickListener = (event) => {
   // Utilize a função cartItemClickListener(event) para implementar a lógica necessária para remover o item do carrinho.
   event.target.remove();
-  // saveToLocalStorage();
+  saveToLocalStorage();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -93,7 +93,14 @@ const getItens = async () => {
 
 // const getSkuFromProductItem = (item) => item.querySelector('span.item__sku').innerText;
 
+// adicionando para parte dois item 8
+const cleanClickCartItem = () => {
+  const cleanClick = document.querySelectorAll('.cart__item');
+  cleanClick.forEach((click) => click.addEventListener('click', cartItemClickListener));
+};
+
 window.onload = () => {
   getItens();
   cartItems.innerHTML = getSavedCartItems();
+  cleanClickCartItem();
 };
