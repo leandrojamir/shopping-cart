@@ -12,11 +12,26 @@ const createCustomElement = (element, className, innerText) => {
   return e;
 };
 
+// 8. Carregue o carrinho de compras ao iniciar a página
+// é mais fácil criar função para salvar localStorage e chamar ao final de getElement e cartItemClickListener
+// uma vez que getSavedCartItems não pode adicionar no localStorage
+
+// cartItems estava declarada dentro de getElement gerando erro na linha 19 com cartItems in promisse
+const cartItems = document.querySelector('.cart__items'); 
+
+const saveToLocalStorage = () => {
+  const teste6 = cartItems.innerHTML; 
+  console.log(teste6);
+  saveCartItems(teste6); 
+  getSavedCartItems(); 
+};
+
 // 5. Remova o item do carrinho de compras ao clicar nele
 
 const cartItemClickListener = (event) => {
   // Utilize a função cartItemClickListener(event) para implementar a lógica necessária para remover o item do carrinho.
   event.target.remove();
+  // saveToLocalStorage();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
@@ -36,8 +51,8 @@ const getElement = async (sku) => {
   const getFetchItem = await fetchItem(sku);
   const object = { sku: getFetchItem.id, name: getFetchItem.title, salePrice: getFetchItem.price };
   const appendItem = createCartItemElement(object);
-  const cartItems = document.querySelector('.cart__items');
   cartItems.appendChild(appendItem);
+  saveToLocalStorage();
 };
 
 const createProductItemElement = ({ sku, name, image }) => {
@@ -80,4 +95,5 @@ const getItens = async () => {
 
 window.onload = () => {
   getItens();
+  cartItems.innerHTML = getSavedCartItems();
 };
