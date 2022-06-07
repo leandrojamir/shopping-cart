@@ -27,7 +27,6 @@ const saveToLocalStorage = () => {
 };
 
 // 9. Calcule o valor total dos itens do carrinho de compras
-// const subTotal = document.querySelector('.total-price');
 const subTotal = document.querySelector('.total-price');
 
 const sumPrice = () => {
@@ -36,9 +35,19 @@ const sumPrice = () => {
   cartLi.forEach((item) => {
     $ += parseFloat(item.innerHTML.split('$')[1]);
   });
-  subTotal.innerText = `Subtotal: R$ ${$}`;
+  // subTotal.innerText = `Subtotal: R$ ${$}`;
 // expected <div.total-price> to have text '1799', but the text was Subtotal: R$ 1799
   subTotal.innerText = $;
+};
+
+// 10. Limpe o carrinho de compras
+const clearCart = () => {
+  const clearButton = document.querySelector('.empty-cart');
+  clearButton.addEventListener('click', () => {
+    cartItems.innerHTML = '';
+    localStorage.setItem('cartItems', cartItems);
+  });
+  sumPrice();
 };
 
 // 5. Remova o item do carrinho de compras ao clicar nele
@@ -119,6 +128,7 @@ const cleanClickCartItem = () => {
 
 window.onload = () => {
   getItens();
+  clearCart();
   cartItems.innerHTML = getSavedCartItems();
   cleanClickCartItem();
 };
