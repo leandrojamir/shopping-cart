@@ -26,18 +26,35 @@ const saveToLocalStorage = () => {
   getSavedCartItems(); 
 };
 
+// 9. Calcule o valor total dos itens do carrinho de compras
+// const subTotal = document.querySelector('.total-price');
+const subTotal = document.querySelector('.total-price');
+
+const sumPrice = () => {
+  const cartLi = document.querySelectorAll('.cart__item');
+  let $ = 0;
+  cartLi.forEach((item) => {
+    $ += parseFloat(item.innerHTML.split('$')[1]);
+  });
+  subTotal.innerText = `Subtotal: R$ ${$}`;
+// expected <div.total-price> to have text '1799', but the text was Subtotal: R$ 1799
+  subTotal.innerText = $;
+};
+
 // 5. Remova o item do carrinho de compras ao clicar nele
 
 const cartItemClickListener = (event) => {
   // Utilize a função cartItemClickListener(event) para implementar a lógica necessária para remover o item do carrinho.
   event.target.remove();
   saveToLocalStorage();
+  sumPrice();
 };
 
 const createCartItemElement = ({ sku, name, salePrice }) => {
   const li = document.createElement('li');
   li.className = 'cart__item';
   li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  sumPrice();
   li.addEventListener('click', cartItemClickListener);
   return li;
 };
@@ -53,6 +70,7 @@ const getElement = async (sku) => {
   const appendItem = createCartItemElement(object);
   cartItems.appendChild(appendItem);
   saveToLocalStorage();
+  sumPrice();
 };
 
 const createProductItemElement = ({ sku, name, image }) => {
