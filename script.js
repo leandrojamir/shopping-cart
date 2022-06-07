@@ -47,7 +47,14 @@ const clearCart = () => {
     cartItems.innerHTML = '';
     localStorage.setItem('cartItems', cartItems);
   });
-  sumPrice();
+};
+
+// 11. Adicione um texto de carregando durante uma requisição à API
+const loadingText = async () => {
+  const loading = document.querySelector('.loading');
+  await fetchProducts('computador');
+  // Expected <div.loading> not to exist in the DOM, but it was continuously found.
+  loading.remove();
 };
 
 // 5. Remova o item do carrinho de compras ao clicar nele
@@ -131,4 +138,5 @@ window.onload = () => {
   clearCart();
   cartItems.innerHTML = getSavedCartItems();
   cleanClickCartItem();
+  loadingText();
 };
